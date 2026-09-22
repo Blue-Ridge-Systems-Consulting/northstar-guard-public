@@ -15,7 +15,6 @@ Northstar Guard is a clean-room, monitor-only security toolkit. It focuses on hi
 | Fedora COSMIC | [fedora-cosmic/](fedora-cosmic/) | `bash fedora-cosmic/install.sh` |
 | Headless Linux / Rocky Linux | [server-headless/](server-headless/) | `sudo bash server-headless/install.sh` |
 | Windows 10 / 11 / Server | [windows/](windows/) | `powershell -ExecutionPolicy Bypass -File windows/install-northstar-guard.ps1` |
-| iPhone / iPad | [ios/](ios/) | Open `NorthstarGuard.xcodeproj` in Xcode |
 
 Each package has its own platform README and installer. Installers use the current user or service account and do not assume a specific private username, network, or fleet.
 
