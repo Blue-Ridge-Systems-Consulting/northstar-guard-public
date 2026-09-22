@@ -10,7 +10,7 @@
   <a href="https://github.com/Blue-Ridge-Systems-Consulting/northstar-guard-public"><img src="https://img.shields.io/badge/status-public%20release-9be870?style=for-the-badge" alt="Public release"></a>
 </p>
 
-Northstar Guard is a clean-room, monitor-only security toolkit. It checks high-value locations, explains why an item was reported, writes timestamped Markdown reports, and leaves remediation decisions with the operator. It is designed to complement the platform’s built-in security controls—not pretend to be a commercial antivirus replacement.
+Northstar Guard is a clean-room, monitor-only security toolkit. It checks high-value locations, explains why an item was flagged, and leaves remediation decisions with the operator. It is designed to complement the platform’s built-in security controls—not pretend to be a commercial antivirus replacement.
 
 <p align="center"><img src="assets/favicon.svg" alt="Northstar Guard" width="96"></p>
 
@@ -32,7 +32,7 @@ Each package has its own README and installer. Installers use the current user o
 
 - **Focused by default:** scans the locations most likely to matter without crawling an entire disk.
 - **Low overhead:** paced monitors and bounded file sizes keep resource use predictable.
-- **Readable evidence:** timestamped Markdown reports include scope, engines, findings, recommendations, and data gaps.
+- **Readable evidence:** local findings include the path, reason, severity, and detection engine.
 - **Operator controlled:** trust known-good findings explicitly; nothing is silently deleted or quarantined.
 - **Native where it matters:** AppKit on macOS, native ARM64 builds on Apple Silicon, GTK on Fedora COSMIC, systemd for servers, and PowerShell/WinForms on Windows.
 
@@ -42,9 +42,9 @@ Northstar uses focused, configurable scopes rather than crawling every file on a
 
 Detection is evidence-based and monitor-only: downloaded executable heuristics, quarantine metadata, misleading extensions, platform signature validation, persistence baselines, YARA rules, and optional ClamAV integration for the headless Linux package. It does not delete or quarantine files automatically.
 
-## Reports and trusted findings
+## Findings and trusted items
 
-Reports are timestamped Markdown with an executive summary, scan coverage, findings, recommendations, and data gaps. Operators can explicitly mark known-good findings as trusted. Trust is a local allow-list decision, not a malware verdict.
+Operators can explicitly mark known-good findings as trusted. Trust is a local allow-list decision, not a malware verdict.
 
 ## Product visuals
 
@@ -55,7 +55,7 @@ The repository includes representative product assets in each platform package:
 - macOS product icon: [`macos/Assets/NorthstarGuardIcon.icns`](macos/Assets/NorthstarGuardIcon.icns)
 - Windows product icon: [`windows/NorthstarGuard.ico`](windows/NorthstarGuard.ico)
 
-Private fleet dashboards, live reports, screenshots, hostnames, and infrastructure details are intentionally not part of this public release.
+Private fleet dashboards, screenshots, hostnames, and infrastructure details are intentionally not part of this public release.
 
 ## Building and testing
 

@@ -12,4 +12,4 @@ Include the affected package and version, platform, reproduction steps, impact, 
 
 ## Scope
 
-Northstar Guard is monitor-only by design. Reports are local Markdown, and no package in this public repository should require a private fleet, API credential, or hard-coded infrastructure address.
+Northstar Guard is monitor-only by design, and no package in this public repository should require a private fleet, API credential, or hard-coded infrastructure address.
