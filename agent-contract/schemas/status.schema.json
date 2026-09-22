@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://northstar.local/schemas/status-1.0.json",
+  "title": "Northstar Agent Status v1",
+  "type": "object",
+  "additionalProperties": true,
+  "required": ["schemaVersion", "agentId", "agentVersion", "platform", "host", "monitoring", "scanInProgress", "findings", "trustedExclusions", "updatedAt", "capabilities"],
+  "properties": {
+    "schemaVersion": {"const": "1.0"},
+    "agentId": {"type": "string", "minLength": 8},
+    "agentVersion": {"type": "string", "minLength": 1},
+    "platform": {"enum": ["macos", "windows", "linux", "freebsd", "other"]},
+    "osVersion": {"type": "string"},
+    "architecture": {"type": "string"},
+    "host": {"type": "object", "required": ["name"], "additionalProperties": true, "properties": {"name": {"type": "string"}, "address": {"type": "string"}, "tags": {"type": "array", "items": {"type": "string"}}}},
+    "monitoring": {"type": "boolean"},
+    "scanInProgress": {"type": "boolean"},
+    "scanMode": {"enum": ["live", "focused", "full", "path", null]},
+    "findings": {"type": "integer", "minimum": 0},
+    "trustedExclusions": {"type": "integer", "minimum": 0},
+    "examined": {"type": "integer", "minimum": 0},
+    "lastScanAt": {"type": ["string", "null"], "format": "date-time"},
+    "lastReport": {"type": ["string", "null"]},
+    "updatedAt": {"type": "string", "format": "date-time"},
+    "capabilities": {"type": "object", "required": ["scanFocused", "scanFull", "trustItems", "reports"], "properties": {"scanFocused": {"type": "boolean"}, "scanFull": {"type": "boolean"}, "trustItems": {"type": "boolean"}, "reports": {"type": "boolean"}, "networkProvider": {"type": ["string", "null"]}}}
+  }
+}

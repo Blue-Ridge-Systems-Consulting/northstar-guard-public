@@ -1,0 +1,15 @@
+{
+  "schemaVersion": "1.0",
+  "findingId": "f-20260919-020504-a1b2c3d4",
+  "agentId": "mac-ray-7f41c6b2",
+  "detectedAt": "2026-09-19T02:05:04-04:00",
+  "severity": "MEDIUM",
+  "category": "quarantine",
+  "path": "/Users/rowens/Downloads/Firefox 149.0.dmg",
+  "sha256": null,
+  "engines": ["download-heuristic", "apple-quarantine"],
+  "reasons": ["executable or installer arrived in Downloads", "Apple quarantine metadata present; Gatekeeper review applies"],
+  "state": "active",
+  "trustedAt": null,
+  "scanRequestId": "scan-20260919-020602"
+}

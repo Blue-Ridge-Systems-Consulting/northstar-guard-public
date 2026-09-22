@@ -1,0 +1,4 @@
+Northstar Guard Windows Edition 1.0
+Compatibility: Windows 10, Windows 11, Windows Server 2025
+Runtime: Built-in Windows PowerShell 5.1, WinForms, Task Scheduler
+UI: OS-aware dashboard title and subtitle; compatible with Windows 10, Windows 11, and Windows Server 2025

@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://northstar.local/schemas/trusted-item-1.0.json",
+  "title": "Northstar Trusted Item v1",
+  "type": "object",
+  "additionalProperties": true,
+  "required": ["path", "trustedAt", "trustedBy"],
+  "properties": {
+    "path": {"type": "string", "minLength": 1},
+    "sha256": {"type": ["string", "null"], "pattern": "^[A-Fa-f0-9]{64}$"},
+    "trustedAt": {"type": "string", "format": "date-time"},
+    "trustedBy": {"type": "string", "minLength": 1},
+    "reason": {"type": "string"},
+    "originalFindingId": {"type": ["string", "null"]}
+  }
+}

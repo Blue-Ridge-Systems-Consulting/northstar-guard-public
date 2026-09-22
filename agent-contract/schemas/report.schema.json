@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://northstar.local/schemas/report-1.0.json",
+  "title": "Northstar Report Manifest v1",
+  "type": "object",
+  "additionalProperties": true,
+  "required": ["schemaVersion", "reportId", "agentId", "generatedAt", "mode", "scope", "examined", "findings", "trustedExclusions", "engines", "markdownPath"],
+  "properties": {
+    "schemaVersion": {"const": "1.0"},
+    "reportId": {"type": "string", "minLength": 8},
+    "agentId": {"type": "string", "minLength": 8},
+    "generatedAt": {"type": "string", "format": "date-time"},
+    "mode": {"enum": ["live", "focused", "full", "path"]},
+    "scope": {"type": "array", "items": {"type": "string"}},
+    "examined": {"type": "integer", "minimum": 0},
+    "findings": {"type": "integer", "minimum": 0},
+    "trustedExclusions": {"type": "integer", "minimum": 0},
+    "skipped": {"type": "integer", "minimum": 0},
+    "engines": {"type": "array", "items": {"type": "string"}, "minItems": 1},
+    "markdownPath": {"type": "string", "minLength": 1},
+    "summarySource": {"type": "string"}
+  }
+}

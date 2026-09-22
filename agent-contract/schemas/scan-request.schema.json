@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://northstar.local/schemas/scan-request-1.0.json",
+  "title": "Northstar Scan Request v1",
+  "type": "object",
+  "additionalProperties": true,
+  "required": ["schemaVersion", "requestId", "requestedAt", "requestedBy", "mode"],
+  "properties": {
+    "schemaVersion": {"const": "1.0"},
+    "requestId": {"type": "string", "minLength": 8},
+    "requestedAt": {"type": "string", "format": "date-time"},
+    "requestedBy": {"type": "string", "minLength": 1},
+    "mode": {"enum": ["focused", "full", "path"]},
+    "path": {"type": ["string", "null"]},
+    "priority": {"enum": ["normal", "low"]}
+  },
+  "allOf": [{"if": {"properties": {"mode": {"const": "path"}}}, "then": {"required": ["path"], "properties": {"path": {"type": "string", "minLength": 1}}}}]
+}

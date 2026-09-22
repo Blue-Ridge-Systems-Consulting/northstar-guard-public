@@ -1,0 +1,19 @@
+{
+  "schemaVersion": "1.0",
+  "agentId": "mac-ray-7f41c6b2",
+  "agentVersion": "1.0.0",
+  "platform": "macos",
+  "osVersion": "macOS",
+  "architecture": "arm64",
+  "host": {"name": "example-host", "tags": ["laptop"]},
+  "monitoring": true,
+  "scanInProgress": false,
+  "scanMode": null,
+  "findings": 0,
+  "trustedExclusions": 12,
+  "examined": 63,
+  "lastScanAt": "2026-09-19T02:06:02-04:00",
+  "lastReport": "reports/20260919-020602-northstar-guard-focused.md",
+  "updatedAt": "2026-09-19T02:06:02-04:00",
+  "capabilities": {"scanFocused": true, "scanFull": true, "trustItems": true, "reports": true, "networkProvider": null}
+}

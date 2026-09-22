@@ -1,0 +1,33 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {};
+	objectVersion = 56;
+	objects = {
+		111111111111111111111111 /* Project object */ = {isa = PBXProject; attributes = {LastUpgradeCheck = 1420; TargetAttributes = {222222222222222222222222 = {CreatedOnToolsVersion = 14.2;};};}; buildConfigurationList = 333333333333333333333333; compatibilityVersion = "Xcode 3.2"; developmentRegion = en; hasScannedForEncodings = 0; knownRegions = (en, Base); mainGroup = 444444444444444444444444; productRefGroup = 555555555555555555555555; projectDirPath = ""; projectRoot = ""; targets = (222222222222222222222222); };
+		222222222222222222222222 /* NorthstarGuard */ = {isa = PBXNativeTarget; buildConfigurationList = 666666666666666666666666; buildPhases = (777777777777777777777777, 888888888888888888888888, 999999999999999999999999); buildRules = (); dependencies = (); name = NorthstarGuard; productName = NorthstarGuard; productReference = AAAAAAAAAAAAAAAAAAAAAAAA; productType = "com.apple.product-type.application"; };
+		333333333333333333333333 = {isa = XCConfigurationList; buildConfigurations = (BBBBBBBBBBBBBBBBBBBBBBBB, CCCCCCCCCCCCCCCCCCCCCCCC); defaultConfigurationIsVisible = 0; defaultConfigurationName = Release; };
+		444444444444444444444444 = {isa = PBXGroup; children = (DDDDDDDDDDDDDDDDDDDDDDDD, EEEEEEEEEEEEEEEEEEEEEEEE); sourceTree = "<group>"; };
+		555555555555555555555555 = {isa = PBXGroup; children = (AAAAAAAAAAAAAAAAAAAAAAAA); name = Products; sourceTree = "<group>"; };
+		666666666666666666666666 = {isa = XCConfigurationList; buildConfigurations = (FFFFFFFFFFFFFFFFFFFFFFFF, 121212121212121212121212); defaultConfigurationIsVisible = 0; defaultConfigurationName = Release; };
+		777777777777777777777777 = {isa = PBXSourcesBuildPhase; buildActionMask = 2147483647; files = (131313131313131313131313, 141414141414141414141414, 151515151515151515151515, 161616161616161616161616); runOnlyForDeploymentPostprocessing = 0; };
+		888888888888888888888888 = {isa = PBXResourcesBuildPhase; buildActionMask = 2147483647; files = (); runOnlyForDeploymentPostprocessing = 0; };
+		999999999999999999999999 = {isa = PBXFrameworksBuildPhase; buildActionMask = 2147483647; files = (); runOnlyForDeploymentPostprocessing = 0; };
+		DDDDDDDDDDDDDDDDDDDDDDDD = {isa = PBXGroup; children = (171717171717171717171717, 181818181818181818181818, 191919191919191919191919, 202020202020202020202020); path = NorthstarGuard; sourceTree = "<group>"; };
+		EEEEEEEEEEEEEEEEEEEEEEEE = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = NorthstarGuard/Info.plist; sourceTree = "<group>"; };
+		AAAAAAAAAAAAAAAAAAAAAAAA = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NorthstarGuard.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		131313131313131313131313 = {isa = PBXBuildFile; fileRef = 171717171717171717171717; };
+		141414141414141414141414 = {isa = PBXBuildFile; fileRef = 181818181818181818181818; };
+		151515151515151515151515 = {isa = PBXBuildFile; fileRef = 191919191919191919191919; };
+		161616161616161616161616 = {isa = PBXBuildFile; fileRef = 202020202020202020202020; };
+		171717171717171717171717 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NorthstarGuardApp.swift; sourceTree = "<group>"; };
+		181818181818181818181818 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
+		191919191919191919191919 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
+		202020202020202020202020 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		BBBBBBBBBBBBBBBBBBBBBBBB = {isa = XCBuildConfiguration; buildSettings = { }; name = Debug; };
+		CCCCCCCCCCCCCCCCCCCCCCCC = {isa = XCBuildConfiguration; buildSettings = { }; name = Release; };
+		FFFFFFFFFFFFFFFFFFFFFFFF = {isa = XCBuildConfiguration; buildSettings = { INFOPLIST_FILE = NorthstarGuard/Info.plist; PRODUCT_BUNDLE_IDENTIFIER = com.owensreo.NorthstarGuard.iOS; PRODUCT_NAME = "$(TARGET_NAME)"; SDKROOT = iphoneos; SWIFT_VERSION = 5.0; TARGETED_DEVICE_FAMILY = "1,2"; IPHONEOS_DEPLOYMENT_TARGET = 16.0; }; name = Debug; };
+		121212121212121212121212 = {isa = XCBuildConfiguration; buildSettings = { INFOPLIST_FILE = NorthstarGuard/Info.plist; PRODUCT_BUNDLE_IDENTIFIER = com.owensreo.NorthstarGuard.iOS; PRODUCT_NAME = "$(TARGET_NAME)"; SDKROOT = iphoneos; SWIFT_VERSION = 5.0; TARGETED_DEVICE_FAMILY = "1,2"; IPHONEOS_DEPLOYMENT_TARGET = 16.0; }; name = Release; };
+	};
+	rootObject = 111111111111111111111111;
+}

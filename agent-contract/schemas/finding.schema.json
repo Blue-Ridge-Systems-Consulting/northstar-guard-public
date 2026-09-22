@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://northstar.local/schemas/finding-1.0.json",
+  "title": "Northstar Finding Event v1",
+  "type": "object",
+  "additionalProperties": true,
+  "required": ["schemaVersion", "findingId", "agentId", "detectedAt", "severity", "category", "path", "engines", "reasons", "state"],
+  "properties": {
+    "schemaVersion": {"const": "1.0"},
+    "findingId": {"type": "string", "minLength": 8},
+    "agentId": {"type": "string", "minLength": 8},
+    "detectedAt": {"type": "string", "format": "date-time"},
+    "severity": {"enum": ["INFO", "LOW", "MEDIUM", "HIGH", "CRITICAL"]},
+    "category": {"enum": ["malware", "signature", "quarantine", "persistence", "heuristic", "network", "configuration", "unknown"]},
+    "path": {"type": "string", "minLength": 1},
+    "sha256": {"type": ["string", "null"], "pattern": "^[A-Fa-f0-9]{64}$"},
+    "engines": {"type": "array", "items": {"type": "string"}, "minItems": 1},
+    "reasons": {"type": "array", "items": {"type": "string"}, "minItems": 1},
+    "state": {"enum": ["active", "trusted", "resolved", "suppressed"]},
+    "trustedAt": {"type": ["string", "null"], "format": "date-time"},
+    "scanRequestId": {"type": ["string", "null"]}
+  }
+}
