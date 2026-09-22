@@ -1,6 +1,6 @@
 # Northstar Agent Contract v1
 
-This contract is the shared boundary between Northstar agents and future dashboards/mobile clients. Agents remain local-first; the contract describes data, not a required transport. A client may read these objects from local files, an authenticated API, or a Tailscale/Cloudflare-connected relay.
+This contract is the shared boundary between Northstar agents and future dashboards. Agents remain local-first; the contract describes data, not a required transport. A client may read these objects from local files, an authenticated API, or a private connected relay.
 
 ## Compatibility rules
 
@@ -32,7 +32,7 @@ Trusted entries should identify the path and trust time, and should include a SH
 
 ### Report manifest
 
-Each Markdown report may have a companion manifest carrying normalized counts, scope, engines, and the Markdown path. This lets a mobile client index reports without parsing prose. See `schemas/report.schema.json`.
+Each Markdown report may have a companion manifest carrying normalized counts, scope, engines, and the Markdown path. See `schemas/report.schema.json`.
 
 ## Migration mapping
 

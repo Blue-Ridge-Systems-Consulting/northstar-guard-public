@@ -2,7 +2,7 @@
 
 <p align="center"><img src="assets/blue-ridge-systems-consulting-logo.svg" alt="Blue Ridge Systems Consulting" width="360"></p>
 
-<p align="center">A lightweight, local-first security monitor for macOS, Apple Silicon, Fedora COSMIC, headless Linux, Windows, and iOS/iPadOS.</p>
+<p align="center">A lightweight, local-first security monitor for macOS, Apple Silicon, Fedora COSMIC, headless Linux, and Windows.</p>
 
 Northstar Guard is a clean-room, monitor-only security toolkit. It focuses on high-value locations, explains why an item was reported, writes timestamped Markdown reports, and leaves remediation decisions with the operator. It does not claim to replace a commercial antivirus product.
 
