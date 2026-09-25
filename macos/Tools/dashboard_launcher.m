@@ -31,7 +31,8 @@
     NSView *status=[self card:NSMakeRect(32,420,756,84)]; NSView *dot=[[NSView alloc]initWithFrame:NSMakeRect(22,33,12,12)]; dot.wantsLayer=YES; dot.layer.backgroundColor=[[NSColor colorWithRed:.25 green:.89 blue:.64 alpha:1] CGColor]; dot.layer.cornerRadius=6; [status addSubview:dot];
     self.monitoringLabel=[self label:@"Monitoring active" frame:NSMakeRect(48,48,230,20) size:17 bold:YES color:NSColor.whiteColor]; [status addSubview:self.monitoringLabel];
     [status addSubview:[self label:@"12% CPU target · 10% RAM cap · monitor-only" frame:NSMakeRect(48,22,280,16) size:12 bold:NO color:[NSColor colorWithWhite:.72 alpha:1]]];
-    NSArray *buttons=@[@[@"Start",@"startMonitoring:"],@[@"Stop",@"stopMonitoring:"],@[@"Scan now",@"scanFocused:"],@[@"Full scope",@"scanFull:"],@[@"Trust selected",@"trustSelected:"]]; CGFloat x=302; for(NSArray *spec in buttons){NSButton *b=[NSButton buttonWithTitle:spec[0] target:self action:NSSelectorFromString(spec[1])]; b.frame=NSMakeRect(x,29,88,30); [status addSubview:b]; x+=91;} [content addSubview:status];
+    NSArray *buttons=@[@[@"Start",@"startMonitoring:",@64],@[@"Stop",@"stopMonitoring:",@64],@[@"Scan now",@"scanFocused:",@82],@[@"Full scope",@"scanFull:",@86],@[@"Trust selected",@"trustSelected:",@112]];
+    CGFloat x=300; for(NSArray *spec in buttons){CGFloat width=[spec[2] doubleValue]; NSButton *b=[NSButton buttonWithTitle:spec[0] target:self action:NSSelectorFromString(spec[1])]; b.frame=NSMakeRect(x,43,width,30); [status addSubview:b]; x+=width+5;} [content addSubview:status];
     [content addSubview:[self label:@"Recent activity" frame:NSMakeRect(32,384,250,23) size:17 bold:YES color:NSColor.whiteColor]];
     self.summary=[self label:@"Loading findings…" frame:NSMakeRect(550,387,238,17) size:12 bold:NO color:[NSColor colorWithWhite:.68 alpha:1]]; self.summary.alignment=NSTextAlignmentRight; [content addSubview:self.summary];
     NSScrollView *scroll=[[NSScrollView alloc]initWithFrame:NSMakeRect(32,105,756,267)]; scroll.hasVerticalScroller=YES; scroll.borderType=NSBezelBorder;
@@ -44,7 +45,28 @@
 }
 - (NSURL *)trustedURL { return [NSURL fileURLWithPath:[NSHomeDirectory() stringByAppendingPathComponent:@"Library/Application Support/NorthstarGuard/trusted-known-good.json"]]; }
 - (NSArray *)trustedItems { NSData *data=[NSData dataWithContentsOfURL:[self trustedURL]]; if(!data.length) return @[]; id value=[NSJSONSerialization JSONObjectWithData:data options:0 error:nil]; NSArray *items=[value isKindOfClass:NSDictionary.class]?value[@"items"]:nil; return [items isKindOfClass:NSArray.class]?items:@[]; }
-- (void)reload { [self.items removeAllObjects]; NSMutableSet *trusted=[NSMutableSet set]; for(NSDictionary *entry in [self trustedItems]) if([entry[@"path"] isKindOfClass:NSString.class]) [trusted addObject:entry[@"path"]]; NSString *path=[NSHomeDirectory() stringByAppendingPathComponent:@"Library/Application Support/NorthstarGuard/findings.jsonl"]; NSString *content=[NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:nil] ?: @""; for(NSString *line in [content componentsSeparatedByCharactersInSet:NSCharacterSet.newlineCharacterSet]) { NSDictionary *d=[NSJSONSerialization JSONObjectWithData:[line dataUsingEncoding:NSUTF8StringEncoding] options:0 error:nil]; if([d isKindOfClass:NSDictionary.class] && ![trusted containsObject:d[@"path"]] && ![d[@"path"] containsString:@"/Northstar Guard.app/"]) [self.items addObject:d]; } if(self.items.count>80) self.items=[[self.items subarrayWithRange:NSMakeRange(self.items.count-80,80)] mutableCopy]; NSDictionary *state=[NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfFile:[NSHomeDirectory() stringByAppendingPathComponent:@"Library/Application Support/NorthstarGuard/status.json"]] options:0 error:nil]; BOOL live=[state[@"monitoring"] boolValue]; self.monitoringLabel.stringValue=state[@"scanInProgress"]?[NSString stringWithFormat:@"%@ scan running…",state[@"mode"]?:@"On-demand"]:(live?@"Monitoring active":@"Monitoring paused"); self.summary.stringValue=[NSString stringWithFormat:@"%lu findings · %lu trusted",(unsigned long)self.items.count,(unsigned long)trusted.count]; [self.table reloadData]; if(self.items.count)[self.table scrollRowToVisible:self.items.count-1]; }
+- (void)reload {
+    NSInteger selectedRow=self.table.selectedRow;
+    NSDictionary *selected=(selectedRow>=0 && (NSUInteger)selectedRow<self.items.count)?self.items[selectedRow]:nil;
+    [self.items removeAllObjects];
+    NSMutableSet *trusted=[NSMutableSet set];
+    for(NSDictionary *entry in [self trustedItems]) if([entry[@"path"] isKindOfClass:NSString.class]) [trusted addObject:entry[@"path"]];
+    NSString *path=[NSHomeDirectory() stringByAppendingPathComponent:@"Library/Application Support/NorthstarGuard/findings.jsonl"];
+    NSString *content=[NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:nil] ?: @"";
+    for(NSString *line in [content componentsSeparatedByCharactersInSet:NSCharacterSet.newlineCharacterSet]) {
+        NSDictionary *d=[NSJSONSerialization JSONObjectWithData:[line dataUsingEncoding:NSUTF8StringEncoding] options:0 error:nil];
+        if([d isKindOfClass:NSDictionary.class] && ![trusted containsObject:d[@"path"]] && ![d[@"path"] containsString:@"/Northstar Guard.app/"]) [self.items addObject:d];
+    }
+    if(self.items.count>80) self.items=[[self.items subarrayWithRange:NSMakeRange(self.items.count-80,80)] mutableCopy];
+    NSDictionary *state=[NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfFile:[NSHomeDirectory() stringByAppendingPathComponent:@"Library/Application Support/NorthstarGuard/status.json"]] options:0 error:nil];
+    BOOL live=[state[@"monitoring"] boolValue];
+    self.monitoringLabel.stringValue=state[@"scanInProgress"]?[NSString stringWithFormat:@"%@ scan running…",state[@"mode"]?:@"On-demand"]:(live?@"Monitoring active":@"Monitoring paused");
+    self.summary.stringValue=[NSString stringWithFormat:@"%lu findings · %lu trusted",(unsigned long)self.items.count,(unsigned long)trusted.count];
+    [self.table reloadData];
+    NSUInteger restored=selected?[self.items indexOfObject:selected]:NSNotFound;
+    if(restored!=NSNotFound)[self.table selectRowIndexes:[NSIndexSet indexSetWithIndex:restored] byExtendingSelection:NO];
+    else if(self.items.count)[self.table scrollRowToVisible:self.items.count-1];
+}
 - (void)refresh:(id)sender { [self reload]; }
 - (void)openLog:(id)sender { [[NSWorkspace sharedWorkspace] openFile:[NSHomeDirectory() stringByAppendingPathComponent:@"Library/Application Support/NorthstarGuard/agent.log"] withApplication:@"Console"]; }
 - (void)runAgent:(NSString *)argument { NSTask *task=[NSTask new]; task.launchPath=[NSHomeDirectory() stringByAppendingPathComponent:@"Library/Application Support/NorthstarGuard/northstar-guard"]; task.arguments=argument?@[argument]:@[]; @try {[task launch];} @catch(NSException *e) { self.monitoringLabel.stringValue=@"Northstar Guard service is unavailable"; } }
