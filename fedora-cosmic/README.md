@@ -1,5 +1,7 @@
 # Northstar Guard for Fedora COSMIC
 
+<img src="northstar-guard.svg" alt="Northstar Guard COSMIC icon" width="128">
+
 This package is maintained in the dedicated [Northstar Guard repository](../README.md). It installs into the invoking user’s home directory and does not assume a user named `ray`.
 
 Northstar Guard is a small, local-first malware monitor for Fedora COSMIC. It
