@@ -1,0 +1,38 @@
+name: Fedora COSMIC validation
+
+on:
+  pull_request:
+    paths:
+      - "fedora-cosmic/**"
+      - ".github/workflows/fedora-cosmic.yml"
+  push:
+    branches:
+      - main
+    paths:
+      - "fedora-cosmic/**"
+      - ".github/workflows/fedora-cosmic.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - name: Install validation dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes --no-install-recommends desktop-file-utils libgtk-4-dev libxml2-utils
+      - name: Validate installer and desktop assets
+        run: |
+          set -euo pipefail
+          bash -n fedora-cosmic/install.sh
+          desktop-file-validate fedora-cosmic/com.owensreo.NorthstarGuard.desktop
+          xmllint --noout fedora-cosmic/northstar-guard.svg
+          test "$(sed -n 's/^Icon=//p' fedora-cosmic/com.owensreo.NorthstarGuard.desktop)" = "northstar-guard"
+      - name: Compile Fedora COSMIC components
+        run: |
+          set -euo pipefail
+          gcc -O2 -Wall -Wextra -Wpedantic fedora-cosmic/northstar-guard.c -o "$RUNNER_TEMP/northstar-guard"
+          gcc -O2 -Wall -Wextra -Wpedantic fedora-cosmic/northstar-guard-ui.c -o "$RUNNER_TEMP/northstar-guard-ui" $(pkg-config --cflags --libs gtk4)
